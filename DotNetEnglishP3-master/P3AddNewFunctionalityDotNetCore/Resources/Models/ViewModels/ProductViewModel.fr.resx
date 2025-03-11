@@ -141,4 +141,7 @@
   <data name="StockNotAnInteger" xml:space="preserve">
     <value>Le stock doit être un nombre supérieur à zéro</value>
   </data>
+  <data name="PriceNotANumber" xml:space="preserve">
+    <value>Le prix doit être un nombre supérieur à zéro</value>
+  </data>
 </root>

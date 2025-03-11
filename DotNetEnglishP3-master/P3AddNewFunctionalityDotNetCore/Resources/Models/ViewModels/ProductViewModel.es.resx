@@ -141,4 +141,7 @@
   <data name="PriceNotGreaterThanZero" xml:space="preserve">
     <value>El valor del precio debe ser un número mayor que cero</value>
   </data>
+  <data name="PriceNotANumber" xml:space="preserve">
+    <value>El valor del precio debe ser un número mayor que cero</value>
+  </data>
 </root>
