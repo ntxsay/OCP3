@@ -9,7 +9,7 @@ namespace P3AddNewFunctionalityDotNetCore.Utilities.ValidationAttributes
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (value is double doubleValue && doubleValue <= Value)
+            if (!double.TryParse(value?.ToString(), out double doubleValue) || doubleValue <= Value)
             {
                 return new ValidationResult(ErrorMessage);
             }
