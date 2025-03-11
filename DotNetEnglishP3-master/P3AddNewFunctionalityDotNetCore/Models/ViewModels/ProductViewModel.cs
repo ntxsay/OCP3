@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using P3AddNewFunctionalityDotNetCore.Utilities.ValidationAttributes;
 using System.ComponentModel.DataAnnotations;
 
 namespace P3AddNewFunctionalityDotNetCore.Models.ViewModels
@@ -16,14 +17,13 @@ namespace P3AddNewFunctionalityDotNetCore.Models.ViewModels
         public string Details { get; set; }
 
         [Required(ErrorMessage = "ErrorMissingStock")]
-        [RegularExpression("^[0-9]+$", ErrorMessage = "StockNotAnInteger")]
         [Range(1, int.MaxValue, ErrorMessage = "StockNotGreaterThanZero")]
         public string Stock { get; set; }
 
-
         [Required(ErrorMessage = "ErrorMissingPrice")]
-        [DataType(DataType.Currency)]
-        [Range(0.01, double.MaxValue, ErrorMessage = "PriceNotGreaterThanZero")]
+        [RegularExpression(@"^\d+(,\d{1,2})*$", ErrorMessage = "PriceNotANumber")]
+        [DoubleParserValidation(ErrorMessage = "PriceNotANumber")]
+        [DoubleGreaterThanValidation(0, ErrorMessage = "PriceNotGreaterThanZero")]
         public string Price { get; set; }
     }
 }
