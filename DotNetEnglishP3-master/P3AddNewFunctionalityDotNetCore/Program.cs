@@ -82,3 +82,6 @@ app.MapControllerRoute(
 await IdentitySeedData.EnsurePopulated(app);
 
 app.Run();
+
+//Rendre la classe public et partielle dans le cadre du test d'intégration
+public partial class Program { }
