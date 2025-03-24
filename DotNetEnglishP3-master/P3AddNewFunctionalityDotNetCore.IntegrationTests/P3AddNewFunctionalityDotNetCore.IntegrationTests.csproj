@@ -28,4 +28,12 @@
       <InternalsVisibleTo Include="..\P3AddNewFunctionalityDotNetCore\P3AddNewFunctionalityDotNetCore.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\P3AddNewFunctionalityDotNetCore\P3AddNewFunctionalityDotNetCore.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Helpers\Utilities.cs" />
+    </ItemGroup>
+
 </Project>
