@@ -1,6 +1,4 @@
 using System.Net;
-using System.Text;
-using System.Text.Json;
 using AngleSharp.Html.Dom;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -8,7 +6,6 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using P3AddNewFunctionalityDotNetCore.Data;
 using P3AddNewFunctionalityDotNetCore.IntegrationTests.Helpers;
-using P3AddNewFunctionalityDotNetCore.Models.ViewModels;
 
 namespace P3AddNewFunctionalityDotNetCore.IntegrationTests;
 
