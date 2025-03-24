@@ -5,6 +5,8 @@ using AngleSharp.Html.Dom;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.EntityFrameworkCore;
+using P3AddNewFunctionalityDotNetCore.Data;
 using P3AddNewFunctionalityDotNetCore.IntegrationTests.Helpers;
 using P3AddNewFunctionalityDotNetCore.Models.ViewModels;
 
@@ -31,7 +33,34 @@ public class ProductControllerTests : IClassFixture<CustomWebApplicationFactory<
             AllowAutoRedirect = false
         });
     }
+
+    /// <summary>
+    /// Teste permettant de récupérer les produits
+    /// </summary>
+    [Fact]
+    public async Task GetProducts()
+    {
+        // Arrange
+        using var scope = _factory.Services.CreateScope();
+        var scopedServices = scope.ServiceProvider;
+        var dbContext = scopedServices.GetRequiredService<P3Referential>();
+
+
+        // Act
+        var products = await dbContext.Product.ToArrayAsync();
+        
+        // Assert
+        
+        //Vérifie que la variable products n'est pas nulle
+        Assert.NotNull(products);
+        
+        //Vérifie que la variable products contient au moins un élément
+        Assert.NotEmpty(products);
+    }
     
+    /// <summary>
+    /// Teste permettant de créer un produit
+    /// </summary>
     [Fact]
     public async Task CreateProduct()
     {
@@ -75,6 +104,9 @@ public class ProductControllerTests : IClassFixture<CustomWebApplicationFactory<
         response?.Dispose();
     }
     
+    /// <summary>
+    /// Teste permettant de supprimer un produit
+    /// </summary>
     [Fact]
     public async Task DeleteProduct()
     {
