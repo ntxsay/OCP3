@@ -73,11 +73,11 @@ public class ProductControllerTests : IClassFixture<CustomWebApplicationFactory<
             response = await _client.SendAsync(form,
                 new List<KeyValuePair<string, string>>()
                 {
-                    new("Name", "Produit 1"),
+                    new("Name", "Produit 2"),
                     new("Price", "10"),
-                    new("Description", "Description du produit 1"),
+                    new("Description", "Description du produit 2"),
                     new ("Stock", "10"),
-                    new("Details", "Détails du produit 1"),
+                    new("Details", "Détails du produit 2"),
                 });
         }
         

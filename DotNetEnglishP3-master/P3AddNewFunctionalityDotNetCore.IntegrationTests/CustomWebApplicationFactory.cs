@@ -11,16 +11,14 @@ public class CustomWebApplicationFactory<TProgram>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        // Charger la configuration depuis appsettings.json
+        // Charge la configuration depuis appsettings.json
         builder.ConfigureAppConfiguration((context, config) =>
         {
             var environment = context.HostingEnvironment;
 
-            // Ajouter appsettings.json et appsettings.{Environment}.json
             config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
-            // Ajouter des variables d'environnement (facultatif)
             config.AddEnvironmentVariables();
         });
         
