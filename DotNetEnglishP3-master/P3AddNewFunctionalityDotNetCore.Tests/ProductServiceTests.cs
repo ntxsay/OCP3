@@ -1,19 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Localization;
-using Moq;
-using P3AddNewFunctionalityDotNetCore.Data;
-using P3AddNewFunctionalityDotNetCore.Models.Entities;
-using P3AddNewFunctionalityDotNetCore.Models.Repositories;
-using P3AddNewFunctionalityDotNetCore.Models.ViewModels;
+﻿using P3AddNewFunctionalityDotNetCore.Models.ViewModels;
 using Xunit;
-using P3AddNewFunctionalityDotNetCore.Models;
-using P3AddNewFunctionalityDotNetCore.Models.Services;
 
 namespace P3AddNewFunctionalityDotNetCore.Tests;
 
