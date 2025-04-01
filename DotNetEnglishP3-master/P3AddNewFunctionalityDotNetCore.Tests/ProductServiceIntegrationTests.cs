@@ -22,7 +22,7 @@ public class ProductServiceIntegrationTests : IDisposable
         ? "Server=localhost\\SQLEXPRESS;Database=P3Referential-2f561d3b-493f-46fd-83c9-6e2643e7bd0a;Trusted_Connection=True;MultipleActiveResultSets=true"
         : "Server=192.168.1.14;Database=P3Referential-2f561d3b-493f-46fd-83c9-6e2643e7bd0a;User Id=sa;Password=azerty";
 
-    private const int TestProductId = 12;
+    private const int TestProductId = 1;
     private readonly IConfiguration _configuration;
     private readonly DbContextOptions<P3Referential> _options;
     private readonly P3Referential _dbContext;
