@@ -24,15 +24,16 @@ public class ProductServiceTests
     /// <summary>
     /// L'objectif de ce test est de vérifier que le nom du produit n'est pas null et ne contient pas d'espaces blancs
     /// </summary>
-    [Fact]
-    public void CheckProductNameIsNotNullOrWhitespaceFree()
+    [Theory]
+    [InlineData("Produit 1")]
+    public void CheckProductNameIsNotNullOrWhitespaceFree(string productName)
     {
         // Arrange 
         var product = new ProductViewModel()
         {
-            Name = "Produit 1",
-            Description = "Description du Produit 1",
-            Details = "Détails du Produit 1",
+            Name = productName,
+            Description = $"Description du produit : {productName}",
+            Details = $"Détails du produit : {productName}",
             Price = "1,20",
             Stock = "20"
         };
@@ -49,15 +50,16 @@ public class ProductServiceTests
     /// <summary>
     /// L'objectif de ce test est de vérifier que le nom du produit n'est pas une chaîne vide
     /// </summary>
-    [Fact]
-    public void CheckProductNameIsNotNullOrEmpty()
+    [Theory]
+    [InlineData("Produit 1")]
+    public void CheckProductNameIsNotNullOrEmpty(string productName)
     {
         // Arrange 
         var product = new ProductViewModel()
         {
-            Name = "Produit 1",
-            Description = "Description du Produit 1",
-            Details = "Détails du Produit 1",
+            Name = productName,
+            Description = $"Description du produit : {productName}",
+            Details = $"Détails du produit : {productName}",
             Price = "1,20",
             Stock = "20"
         };
@@ -74,26 +76,25 @@ public class ProductServiceTests
     /// <summary>
     /// L'objectif de ce test est de vérifier que le nom du produit correspond bien à celui qui a été défini
     /// </summary>
-    [Fact]
-    public void CheckProductNameEquals()
+    [Theory]
+    [InlineData("Produit 1", "Produit 1")]
+    public void CheckProductNameEquals(string expectedProductName, string productName)
     {
         // Arrange 
+        // Act
         var product = new ProductViewModel()
         {
-            Name = "Produit 1",
-            Description = "Description du Produit 1",
-            Details = "Détails du Produit 1",
+            Name = productName,
+            Description = $"Description du produit : {productName}",
+            Details = $"Détails du produit : {productName}",
             Price = "1,20",
             Stock = "20"
         };
 
-        // Act
-        var productName = product.Name;
-
         // Assert
 
         //S'assure que le nom du produit est bien celle définie
-        Assert.Equal("Produit 1", productName);
+        Assert.Equal(expectedProductName, product.Name);
     }
 
     #endregion
@@ -103,8 +104,9 @@ public class ProductServiceTests
     /// <summary>
     /// L'objectif de ce test est de vérifier que la valeur du stock de type string est convertible en double
     /// </summary>
-    [Fact]
-    public void CheckProductStockDoubleConversion()
+    [Theory]
+    [InlineData("20")]
+    public void CheckProductStockDoubleConversion(string productStock)
     {
         // Arrange 
         var product = new ProductViewModel()
@@ -113,7 +115,7 @@ public class ProductServiceTests
             Description = "Description du Produit 1",
             Details = "Détails du Produit 1",
             Price = "1,20",
-            Stock = "20"
+            Stock = productStock
         };
 
         // Act
@@ -128,8 +130,9 @@ public class ProductServiceTests
     /// <summary>
     /// L'objectif de ce test est de vérifier que le stock du produit est supérieur à 0
     /// </summary>
-    [Fact]
-    public void CheckProductStockGreaterThanZero()
+    [Theory]
+    [InlineData("20")]
+    public void CheckProductStockGreaterThanZero(string productStock)
     {
         // Arrange 
         var product = new ProductViewModel()
@@ -138,7 +141,7 @@ public class ProductServiceTests
             Description = "Description du Produit 1",
             Details = "Détails du Produit 1",
             Price = "1,20",
-            Stock = "20"
+            Stock = productStock
         };
 
         // Act
@@ -155,8 +158,9 @@ public class ProductServiceTests
     /// <summary>
     /// L'objectif de ce test est de vérifier que le stock est égal à celui défini
     /// </summary>
-    [Fact]
-    public void CheckProductStockEquals()
+    [Theory]
+    [InlineData(20, "20")]
+    public void CheckProductStockEquals(int expectedStock, string productStock)
     {
         // Arrange 
         var product = new ProductViewModel()
@@ -165,7 +169,7 @@ public class ProductServiceTests
             Description = "Description du Produit 1",
             Details = "Détails du Produit 1",
             Price = "1,20",
-            Stock = "20"
+            Stock = productStock
         };
 
         // Act
@@ -176,7 +180,7 @@ public class ProductServiceTests
         // Assert
 
         //S'assure que le stock est égal à la valeur définie
-        Assert.Equal(20, stockValue);
+        Assert.Equal(expectedStock, stockValue);
     }
 
     #endregion
@@ -186,8 +190,9 @@ public class ProductServiceTests
     /// <summary>
     /// L'objectif de ce test est de vérifier que le prix du produit est convertible en type double
     /// </summary>
-    [Fact]
-    public void CheckProductPriceDoubleConversion()
+    [Theory]
+    [InlineData("1,20")]
+    public void CheckProductPriceDoubleConversion(string productPrice)
     {
         // Arrange 
         var product = new ProductViewModel()
@@ -195,7 +200,7 @@ public class ProductServiceTests
             Name = "Produit 1",
             Description = "Description du Produit 1",
             Details = "Détails du Produit 1",
-            Price = "1,20",
+            Price = productPrice,
             Stock = "20"
         };
 
@@ -212,8 +217,9 @@ public class ProductServiceTests
     /// <summary>
     /// L'objectif de ce test est de vérifier que le prix du produit est supérieur à 0
     /// </summary>
-    [Fact]
-    public void CheckProductPriceGreaterThanZero()
+    [Theory]
+    [InlineData("1,20")]
+    public void CheckProductPriceGreaterThanZero(string productPrice)
     {
         // Arrange 
         var product = new ProductViewModel()
@@ -221,7 +227,7 @@ public class ProductServiceTests
             Name = "Produit 1",
             Description = "Description du Produit 1",
             Details = "Détails du Produit 1",
-            Price = "1,20",
+            Price = productPrice,
             Stock = "20"
         };
 
@@ -239,8 +245,9 @@ public class ProductServiceTests
     /// <summary>
     /// L'objectif de ce test est de vérifier que le prix est égal à celui défini
     /// </summary>
-    [Fact]
-    public void CheckProductPriceEquals()
+    [Theory]
+    [InlineData(1.20, "1,20")]
+    public void CheckProductPriceEquals(double expectedPrice, string productPrice)
     {
         // Arrange 
         var product = new ProductViewModel()
@@ -248,7 +255,7 @@ public class ProductServiceTests
             Name = "Produit 1",
             Description = "Description du Produit 1",
             Details = "Détails du Produit 1",
-            Price = "1,20",
+            Price = productPrice,
             Stock = "20"
         };
 
@@ -260,7 +267,7 @@ public class ProductServiceTests
         // Assert
 
         //S'assure que le prix est égal à la valeur définie
-        Assert.Equal(1.20, priceValue);
+        Assert.Equal(expectedPrice, priceValue);
     }
 
     #endregion
