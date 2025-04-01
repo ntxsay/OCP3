@@ -21,94 +21,252 @@ public class ProductServiceTests
 {
     #region Unit tests
 
+    #region Check Product Name
+
     /// <summary>
-    /// L'objectif de ce test est de vérifier que le nom du produit est valide
+    /// L'objectif de ce test est de vérifier que le nom du produit n'est pas null et ne contient pas d'espaces blancs
     /// </summary>
     [Fact]
-    public void CheckProductName()
+    public void CheckProductNameIsNotNullOrWhitespaceFree()
     {
         // Arrange 
-
-        // Act
         var product = new ProductViewModel()
         {
-            Name = "Product 1",
-            Description = "Description of the product 1",
-            Details = "Details of the product 1",
+            Name = "Produit 1",
+            Description = "Description du Produit 1",
+            Details = "Détails du Produit 1",
             Price = "1,20",
             Stock = "20"
         };
+        
+        // Act
+        var isProductNameNullOrWhiteSpace = string.IsNullOrWhiteSpace(product.Name);
+
+        // Assert
+        
+        //S'assure que le nom du produit n'est pas null ou qu'il ne contient pas d'espaces blancs
+        Assert.False(isProductNameNullOrWhiteSpace);
+    }
+    
+    /// <summary>
+    /// L'objectif de ce test est de vérifier que le nom du produit n'est pas une chaîne vide
+    /// </summary>
+    [Fact]
+    public void CheckProductNameIsNotNullOrEmpty()
+    {
+        // Arrange 
+        var product = new ProductViewModel()
+        {
+            Name = "Produit 1",
+            Description = "Description du Produit 1",
+            Details = "Détails du Produit 1",
+            Price = "1,20",
+            Stock = "20"
+        };
+        
+        // Act
+        var isProductNameNullOrEmpty = string.IsNullOrEmpty(product.Name);
 
         // Assert
 
-        //S'assure que le nom du produit n'est pas null
-        Assert.NotNull(product.Name);
+        //S'assure que le nom du produit n'est pas null ou vide
+        Assert.False(isProductNameNullOrEmpty);
+    }
+    
+    /// <summary>
+    /// L'objectif de ce test est de vérifier que le nom du produit correspond bien à celui qui a été défini
+    /// </summary>
+    [Fact]
+    public void CheckProductNameEquals()
+    {
+        // Arrange 
+        var product = new ProductViewModel()
+        {
+            Name = "Produit 1",
+            Description = "Description du Produit 1",
+            Details = "Détails du Produit 1",
+            Price = "1,20",
+            Stock = "20"
+        };
+        
+        // Act
+        var productName = product.Name;
 
-        //S'assure que le nom du produit n'est pas vide
-        Assert.NotEmpty(product.Name);
-
+        // Assert
+        
         //S'assure que le nom du produit est bien celle définie
-        Assert.Equal("Product 1", product.Name);
+        Assert.Equal("Produit 1", productName);
     }
 
+    #endregion
+
+    #region Check Product Stock
+
     /// <summary>
-    /// L'objectif de ce test est de vérifier que le stock du produit est valide
+    /// L'objectif de ce test est de vérifier que la valeur du stock de type string est convertible en double
     /// </summary>
     [Fact]
-    public void CheckProductStock()
+    public void CheckProductStockDoubleConversion()
     {
         // Arrange 
-
-        // Act
         var product = new ProductViewModel()
         {
-            Name = "Product 1",
-            Description = "Description of the product 1",
-            Details = "Details of the product 1",
+            Name = "Produit 1",
+            Description = "Description du Produit 1",
+            Details = "Détails du Produit 1",
             Price = "1,20",
             Stock = "20"
         };
+        
+        // Act
+        var isConvertibleToDouble = double.TryParse(product.Stock, out _);
+        
+        // Assert
+        
+        //S'assure que la valeur du stock du produit est un nombre à virgule
+        Assert.True(isConvertibleToDouble);
+    }
+    
+    /// <summary>
+    /// L'objectif de ce test est de vérifier que le stock du produit est supérieur à 0
+    /// </summary>
+    [Fact]
+    public void CheckProductStockGreaterThanZero()
+    {
+        // Arrange 
+        var product = new ProductViewModel()
+        {
+            Name = "Produit 1",
+            Description = "Description du Produit 1",
+            Details = "Détails du Produit 1",
+            Price = "1,20",
+            Stock = "20"
+        };
+        
+        // Act
+        var stockValue = double.TryParse(product.Stock, out var result)
+            ? result
+            : 0;
 
         // Assert
-
-        //S'assure que la valeur du stock du produit est un nombre décimal ou entier
-        Assert.True(double.TryParse(product.Stock, out var stockValue));
-
+        
         //S'assure que le stock est supérieur à 0
         Assert.True(stockValue > 0);
+    }
+    
+    /// <summary>
+    /// L'objectif de ce test est de vérifier que le stock est égal à celui défini
+    /// </summary>
+    [Fact]
+    public void CheckProductStockEquals()
+    {
+        // Arrange 
+        var product = new ProductViewModel()
+        {
+            Name = "Produit 1",
+            Description = "Description du Produit 1",
+            Details = "Détails du Produit 1",
+            Price = "1,20",
+            Stock = "20"
+        };
+        
+        // Act
+        var stockValue = double.TryParse(product.Stock, out var result)
+            ? result
+            : 0;
 
-        //S'assure que la valeur du stock est bien celle définie
+        // Assert
+        
+        //S'assure que le stock est égal à la valeur définie
         Assert.Equal(20, stockValue);
     }
 
+    #endregion
+
+    #region Check Product Price
+
     /// <summary>
-    /// L'objectif de ce test est de vérifier que le prix du produit est valide
+    /// L'objectif de ce test est de vérifier que le prix du produit est convertible en type double
     /// </summary>
     [Fact]
-    public void CheckProductPrice()
+    public void CheckProductPriceDoubleConversion()
     {
         // Arrange 
-        // Act
         var product = new ProductViewModel()
         {
-            Name = "Product 1",
-            Description = "Description of the product 1",
-            Details = "Details of the product 1",
+            Name = "Produit 1",
+            Description = "Description du Produit 1",
+            Details = "Détails du Produit 1",
             Price = "1,20",
             Stock = "20"
         };
+        
+        // Act
+        var isConvertibleToDouble = double.TryParse(product.Price, out _);
+
 
         // Assert
 
         //S'assure que la valeur du prix du produit est un nombre décimal ou entier
-        Assert.True(double.TryParse(product.Price, out var priceValue));
+        Assert.True(isConvertibleToDouble);
+    }
+    
+    /// <summary>
+    /// L'objectif de ce test est de vérifier que le prix du produit est supérieur à 0
+    /// </summary>
+    [Fact]
+    public void CheckProductPriceGreaterThanZero()
+    {
+        // Arrange 
+        var product = new ProductViewModel()
+        {
+            Name = "Produit 1",
+            Description = "Description du Produit 1",
+            Details = "Détails du Produit 1",
+            Price = "1,20",
+            Stock = "20"
+        };
+        
+        // Act
+        var priceValue = double.TryParse(product.Price, out var result)
+            ? result
+            : 0;
 
+        // Assert
+        
         //S'assure que le prix est supérieur à 0
         Assert.True(priceValue > 0);
+    }
+    
+    /// <summary>
+    /// L'objectif de ce test est de vérifier que le prix est égal à celui défini
+    /// </summary>
+    [Fact]
+    public void CheckProductPriceEquals()
+    {
+        // Arrange 
+        var product = new ProductViewModel()
+        {
+            Name = "Produit 1",
+            Description = "Description du Produit 1",
+            Details = "Détails du Produit 1",
+            Price = "1,20",
+            Stock = "20"
+        };
+        
+        // Act
+        var priceValue = double.TryParse(product.Price, out var result)
+            ? result
+            : 0;
 
-        //S'assure que la valeur du prix est bien celle définie
+        // Assert
+        
+        //S'assure que le prix est égal à la valeur définie
         Assert.Equal(1.20, priceValue);
     }
+
+    #endregion
+    
 
     #endregion
     
@@ -136,7 +294,9 @@ public class ProductServiceTests
             .UseSqlServer(configuration.GetConnectionString("P3Referential"))
             .Options;
 
-        IProductRepository service = new ProductRepository(new P3Referential(options, configuration));
+        var dbContext = new P3Referential(options, configuration);
+        
+        IProductRepository productRepository = new ProductRepository(dbContext);
         var randomNumber = new Random().Next(1, 100);
 
         var product = new Product
@@ -149,7 +309,7 @@ public class ProductServiceTests
         };
 
         //Act
-        service.SaveProduct(product);
+        productRepository.SaveProduct(product);
 
         //Assert
         Assert.True(product.Id > 0);
@@ -195,11 +355,10 @@ public class ProductServiceTests
 
         //Act
         productService.SaveProduct(viewModel);
-        var product = (await productService.GetProduct()).FirstOrDefault(f =>
-            string.Equals(f.Name, productName, StringComparison.InvariantCultureIgnoreCase));
+        var count = await dbContext.Product.CountAsync(f => f.Name == productName);
 
         //Assert
-        Assert.NotNull(product);
+        Assert.True(count > 0);
     }
 
     /// <summary>
@@ -305,7 +464,7 @@ public class ProductServiceTests
     }
 
     /// <summary>
-    /// Ce test vise à récupérer un modèle de vue d'un produit avec l'id spécifié et vérifie qu'il contient bien des produits
+    /// Ce test vise à récupérer un modèle de vue d'un produit avec l'id spécifié
     /// </summary>
     [Theory]
     [InlineData(1)]
@@ -456,7 +615,7 @@ public class ProductServiceTests
     /// </summary>
     [Theory]
     [InlineData(1)]
-    public async Task DeleteProduc(int productId)
+    public async Task DeleteProduct(int productId)
     {
         // Arrange
         IConfiguration configuration = new ConfigurationBuilder()
@@ -480,10 +639,10 @@ public class ProductServiceTests
 
         //Act
         productService.DeleteProduct(productId);
-        var product = (await productService.GetProduct()).FirstOrDefault(f => f.Id == productId);
+        var countId = await dbContext.Product.CountAsync(f => f.Id == productId);
 
         //Assert
-        Assert.Null(product);
+        Assert.Equal(0, countId);
     }
 
     #endregion
